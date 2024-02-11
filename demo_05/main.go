@@ -112,5 +112,5 @@ func main() {
 	//displayDays(2024, 2)
 	//ranDomGame()
 	//getPrimeNumber(200)
-	judgeFishingOrDryingNets(time.Date(1990, 1, 11, 0, 0, 0, 0, time.UTC))
+	//judgeFishingOrDryingNets(time.Date(1990, 1, 11, 0, 0, 0, 0, time.UTC))
 }
