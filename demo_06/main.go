@@ -9,4 +9,3 @@ func main() {
 	fmt.Printf("arr[1] point: %p, value: %v \n", &arr[1], arr[1])
 
 }
-????
