@@ -27,6 +27,8 @@ func bubbleSort(arr []int) {
 	fmt.Printf("%v", arr)
 }
 
+func ILT() {}
+
 func main() {
 	arr := fbn(20)
 	fmt.Printf("%v\n", arr)
