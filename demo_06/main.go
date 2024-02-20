@@ -2,10 +2,23 @@ package main
 
 import "fmt"
 
+func LIS(nums []int) []int {
+	result := [][]int{{nums[0]}}
+	for i := 0; i < len(nums); i++ {
+		for j := len(result) - 1; j >= 0; j-- {
+			line := result[j]
+			tail := line[len(line)-1]
+			if tail < nums[i] {
+				result = append(result, append(line, nums[i]))
+				break
+			} else if tail > nums[i] && j == 0 {
+				result[j] = append([]int{}, nums[i])
+			}
+		}
+	}
+	return result[len(result)-1]
+}
 func main() {
-	arr := [2]string{"你", "好"}
-	fmt.Printf("arr point: %p, value: %v \n", &arr, arr)
-	fmt.Printf("arr[0] point: %p, value: %v \n", &arr[0], arr[0])
-	fmt.Printf("arr[1] point: %p, value: %v \n", &arr[1], arr[1])
-
+	result := LIS([]int{33, 3, 22, 5, 7, 6, 2, 8, 99, 15, 12, 16, 1, 9})
+	fmt.Println(result)
 }
