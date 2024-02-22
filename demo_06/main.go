@@ -18,7 +18,22 @@ func LIS(nums []int) []int {
 	}
 	return result[len(result)-1]
 }
+
+func bubbleSort(nums []int) {
+	for i := 0; i < len(nums); i++ {
+		for j := 1; j < len(nums)-i; j++ {
+			if nums[j] < nums[j-1] {
+				temp := nums[j]
+				nums[j] = nums[j-1]
+				nums[j-1] = temp
+			}
+		}
+	}
+	fmt.Println(nums)
+}
+
 func main() {
 	result := LIS([]int{33, 3, 22, 5, 7, 6, 2, 8, 99, 15, 12, 16, 1, 9})
 	fmt.Println(result)
+	bubbleSort([]int{4, 2, 5, 6, 72, 8})
 }
