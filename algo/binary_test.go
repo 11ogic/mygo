@@ -1,10 +1,7 @@
 package algo
 
 import (
-	"fmt"
-	"reflect"
 	"testing"
-	"time"
 )
 
 /*
@@ -38,26 +35,6 @@ func recursionBinarySearch(nums []int, target int, low int, high int) int {
 	} else {
 		return recursionBinarySearch(nums, target, mid+1, high)
 	}
-}
-
-func TimeSpent(fn interface{}, params ...interface{}) interface{} {
-	function := reflect.ValueOf(fn)
-	if function.Kind() != reflect.Func {
-		panic("expected a function")
-	}
-
-	inner := make([]reflect.Value, len(params))
-	for i, val := range params {
-		inner[i] = reflect.ValueOf(val)
-	}
-
-	start := time.Now()
-	result := function.Call(inner)
-
-	elapsed := time.Since(start).Seconds()
-	fmt.Printf("elapsed: %.10f  result: %v \n", elapsed, result[0].Int())
-
-	return result
 }
 
 func TestBinary(t *testing.T) {

@@ -2,6 +2,10 @@ package algo
 
 import "testing"
 
+var (
+	capacity = 100
+)
+
 type pair struct {
 	key int
 	val string
@@ -12,12 +16,12 @@ type arrayHashMap struct {
 }
 
 func newArrayHashMap() *arrayHashMap {
-	buckets := make([]*pair, 100)
+	buckets := make([]*pair, capacity)
 	return &arrayHashMap{buckets: buckets}
 }
 
 func (a *arrayHashMap) hashFunc(key int) int {
-	return key % 100
+	return key % capacity
 }
 
 func (a *arrayHashMap) get(key int) string {
