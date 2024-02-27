@@ -7,6 +7,9 @@ import (
 	"time"
 )
 
+/*
+O(log n)
+*/
 func binarySearch(nums []int, target int) int {
 	low := 0
 	high := len(nums) - 1
