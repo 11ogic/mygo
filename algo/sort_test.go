@@ -41,5 +41,5 @@ func bubbleSort(nums []int) []int {
 
 func TestSort(t *testing.T) {
 	arr := []int{3, 12, 51, 65, 23, 6, 27, 63, 45, 2, 3, 6, 3, 7, 458, 74, 1}
-	TimeSpent(bubbleSort, arr)
+	TimeSpent(quickSort, arr)
 }
