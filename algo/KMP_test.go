@@ -2,7 +2,7 @@ package algo
 
 import "testing"
 
-func BF(str string, target string) int {
+func BruteForce(str string, target string) int {
 	strRune := []rune(str)
 	targetRune := []rune(target)
 	for i := 0; i <= len(strRune)-len(targetRune); i++ {
@@ -25,5 +25,5 @@ func KMP(str string, target string) int {
 }
 
 func TestKMP(t *testing.T) {
-	TimeSpent(BF, "今天天气真不错", "真不错")
+	TimeSpent(BruteForce, "今天天气真不错", "真不错")
 }
