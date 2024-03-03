@@ -15,7 +15,7 @@ type arrayHashMap struct {
 	buckets []*pair
 }
 
-func newArrayHashMap() *arrayHashMap {
+func NewArrayHashMap() *arrayHashMap {
 	buckets := make([]*pair, capacity)
 	return &arrayHashMap{buckets: buckets}
 }
@@ -53,7 +53,7 @@ func (a *arrayHashMap) each(cb func(val string, key int)) {
 }
 
 func TestHashMap(t *testing.T) {
-	hashMap := newArrayHashMap()
+	hashMap := NewArrayHashMap()
 	hashMap.set(888, "龙年大吉")
 	hashMap.set(666, "身体健康")
 	hashMap.each(func(val string, key int) {
