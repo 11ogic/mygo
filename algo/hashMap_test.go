@@ -1,6 +1,8 @@
 package algo
 
-import "testing"
+import (
+	"testing"
+)
 
 var (
 	capacity = 100
