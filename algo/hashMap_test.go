@@ -5,7 +5,7 @@ import (
 )
 
 var (
-	capacity = 100
+	capacity = 200
 )
 
 type pair struct {
