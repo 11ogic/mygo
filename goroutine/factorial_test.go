@@ -6,11 +6,15 @@ var (
 	numMap = make(map[int]int, 200)
 )
 
-func factorial(n int) int {
+func factorialTailRec(n int, acc int) int {
 	if n == 0 {
-		return 1
+		return acc
 	}
-	return n * factorial(n-1)
+	return factorialTailRec(n-1, acc*n)
+}
+
+func factorial(n int) int {
+	return factorialTailRec(n, 1)
 }
 
 func TestFactorial(t *testing.T) {
