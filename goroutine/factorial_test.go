@@ -1,6 +1,9 @@
 package goroutine
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 var (
 	numMap = make(map[int]int, 200)
@@ -18,7 +21,8 @@ func factorial(n int) int {
 }
 
 func TestFactorial(t *testing.T) {
-	result := factorial(6)
-	numMap[6] = result
-	t.Logf("result: %v", result)
+	for i := 1; i <= 200; i++ {
+		result := factorial(i)
+		fmt.Println(result)
+	}
 }
