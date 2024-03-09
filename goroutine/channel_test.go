@@ -11,7 +11,7 @@ var (
 )
 
 func writeNumChan() {
-	for i := 1; i <= cap(numChan); i++ {
+	for i := 1; i <= 2000; i++ {
 		numChan <- i
 	}
 }
@@ -32,7 +32,11 @@ func TestChannel(t *testing.T) {
 		go writeResChan()
 	}
 	i := 0
-	for v := range resChan {
+	for {
+		v, ok := <-resChan
+		if !ok {
+			break
+		}
 		fmt.Printf("res[%v] = %v\n", i, v)
 		i++
 	}
