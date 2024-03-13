@@ -38,6 +38,7 @@ func TestChannel(t *testing.T) {
 			break
 		}
 		fmt.Printf("res[%v] = %v\n", i, v)
+
 		i++
 	}
 }
