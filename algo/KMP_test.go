@@ -21,6 +21,7 @@ func BruteForce(str string, target string) int {
 }
 
 func KMP(str string, target string) int {
+
 	return -1
 }
 
