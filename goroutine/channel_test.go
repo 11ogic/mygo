@@ -2,13 +2,15 @@ package goroutine
 
 import (
 	"fmt"
+	"sync"
 	"testing"
 )
 
 var (
 	numChan = make(chan int, 2000)
 	resChan = make(chan int, 2000)
-	done    = make(chan bool, 8)
+	mu      sync.Mutex
+	counter = 8
 )
 
 func writeNumChan() {
@@ -26,7 +28,12 @@ func writeResChan() {
 		}
 		resChan <- sum
 	}
-	done <- true
+	mu.Lock()
+	counter--
+	if counter == 0 {
+		close(resChan)
+	}
+	mu.Unlock()
 }
 
 func TestChannel(t *testing.T) {
@@ -34,10 +41,6 @@ func TestChannel(t *testing.T) {
 	for i := 0; i < 8; i++ {
 		go writeResChan()
 	}
-	for i := 0; i < 8; i++ {
-		<-done
-	}
-	close(resChan)
 
 	i := 0
 	for {
