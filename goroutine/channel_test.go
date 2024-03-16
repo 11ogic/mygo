@@ -2,12 +2,14 @@ package goroutine
 
 import (
 	"fmt"
+	"sync"
 	"testing"
 )
 
 var (
 	numChan = make(chan int, 2000)
 	resChan = make(chan int, 2000)
+	wg      sync.WaitGroup
 )
 
 func writeNumChan() {
@@ -24,15 +26,20 @@ func writeResChan() {
 		}
 		resChan <- sum
 	}
+	wg.Done()
 }
 
 func TestChannel(t *testing.T) {
 	go writeNumChan()
+	wg.Add(8)
 	for i := 0; i < 8; i++ {
 		go writeResChan()
 	}
+	wg.Wait()
+	close(resChan)
+
 	i := 0
-	for {
+	for v := range resChan {
 		v, ok := <-resChan
 		if !ok {
 			break
