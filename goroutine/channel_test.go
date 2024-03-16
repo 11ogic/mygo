@@ -16,6 +16,7 @@ func writeNumChan() {
 	for i := 1; i <= 2000; i++ {
 		numChan <- i
 	}
+	close(numChan)
 }
 
 func writeResChan() {
@@ -39,7 +40,7 @@ func TestChannel(t *testing.T) {
 	close(resChan)
 
 	i := 0
-	for v := range resChan {
+	for {
 		v, ok := <-resChan
 		if !ok {
 			break
