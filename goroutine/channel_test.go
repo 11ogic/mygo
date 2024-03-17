@@ -51,4 +51,8 @@ func TestChannel(t *testing.T) {
 		fmt.Printf("res[%v] = %v\n", i, v)
 		i++
 	}
+
+	for v := range make(chan int, 10) {
+		fmt.Println("v = ", v)
+	}
 }
