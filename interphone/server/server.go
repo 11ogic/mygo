@@ -13,7 +13,11 @@ func process(conn net.Conn) {
 			fmt.Println("tcp close")
 			return
 		}
-		fmt.Printf("message: %v --- %v \n", string(result[:n]), conn.RemoteAddr().String())
+		_, err = conn.Write([]byte("welcome to my mind palace \n"))
+		if err != nil {
+			fmt.Println(err)
+		}
+		fmt.Printf("message: %v            ---%v \n", string(result[:n]), conn.RemoteAddr().String())
 	}
 	defer conn.Close()
 }

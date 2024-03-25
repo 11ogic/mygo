@@ -1,6 +1,11 @@
 package main
 
-import "net"
+import (
+	"bufio"
+	"fmt"
+	"net"
+	"os"
+)
 
 func main() {
 	conn, err := net.Dial("tcp", "0.0.0.0:8080")
@@ -10,8 +15,16 @@ func main() {
 
 	defer conn.Close()
 
-	for i := 0; i < 10000; i++ {
-		conn.Write([]byte{'h', 'e', 'l', 'l', 'o'})
+	reader := bufio.NewReader(os.Stdin)
+	message := make([]byte, 1024)
+	for {
+		line, err := reader.ReadString('\n')
+		n, err := conn.Read(message)
+		if err != nil {
+			fmt.Println(err)
+			break
+		}
+		fmt.Println(message[:n])
+		conn.Write([]byte(line))
 	}
-
 }
