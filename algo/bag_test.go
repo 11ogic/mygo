@@ -43,9 +43,9 @@ func optimization(capacity int) {
 			line[i] = value[0]
 		}
 	}
-	for i := 1; i < len(value); i++ {
-
-	}
+	//for i := 1; i < len(value); i++ {
+	//
+	//}
 	fmt.Println(line)
 }
 
