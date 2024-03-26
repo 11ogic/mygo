@@ -43,13 +43,21 @@ func optimization(capacity int) {
 			line[i] = value[0]
 		}
 	}
-	//for i := 1; i < len(value); i++ {
-	//
-	//}
+	for i := 1; i < len(value); i++ {
+		next := make([]int, capacity+1)
+		for j := 0; j <= capacity; j++ {
+			if j < weight[i] {
+				next[j] = line[j]
+			} else {
+				next[j] = max(value[i]+line[j-weight[i]], line[j])
+			}
+		}
+		line = next
+	}
 	fmt.Println(line)
 }
 
 func TestBag(t *testing.T) {
 	calc(6)
-	optimization(6)
+	optimization(7)
 }
