@@ -49,14 +49,15 @@ func registry(conn net.Conn) bool {
 		for {
 			redisConn := pool.Get()
 			if i == 0 {
-				_, err := redisConn.Do("HSet", message, "username")
+				_, err := redisConn.Do("HSet", message, "username", message)
 				if err != nil {
 					conn.Write([]byte("username is wrong"))
+					fmt.Println(err)
 					return false
 				}
 				username = message
 			} else {
-				_, err := redisConn.Do("HSet", username, "password")
+				_, err := redisConn.Do("HSet", username, "password", message)
 				if err != nil {
 					conn.Write([]byte("password is wrong"))
 					conn.Close()
