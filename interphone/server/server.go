@@ -3,8 +3,14 @@ package main
 import (
 	"fmt"
 	"github.com/gomodule/redigo/redis"
+	"mygo/utils"
 	"net"
 )
+
+type request struct {
+	Msg  string `json:"msg"`
+	Code int    `json:"code"`
+}
 
 var (
 	pool *redis.Pool
@@ -144,6 +150,18 @@ func process(conn net.Conn) {
 	defer conn.Close()
 }
 
+func test(c net.Conn) {
+	for {
+		var req request
+		err := utils.ReadData(c, &req)
+		if err != nil {
+			fmt.Println("error")
+		}
+		fmt.Println("req.msg = ", req.Msg)
+		fmt.Println("req.code = ", req.Code)
+	}
+}
+
 func main() {
 	fmt.Println("link start...")
 	l, err := net.Listen("tcp", ":8080")
@@ -157,6 +175,6 @@ func main() {
 		if err != nil {
 			fmt.Println(err)
 		}
-		go process(conn)
+		go test(conn)
 	}
 }
