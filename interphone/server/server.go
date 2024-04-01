@@ -21,8 +21,6 @@ func init() {
 	}
 }
 
-func publishMessage() {}
-
 func sendMessage(message string, ip string) {
 	fmt.Printf("message: %v ---%v \n", message, ip)
 }
