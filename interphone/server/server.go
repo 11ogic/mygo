@@ -7,9 +7,8 @@ import (
 	"net"
 )
 
-type request struct {
-	Msg  string `json:"msg"`
-	Code int    `json:"code"`
+type data struct {
+	Msg string `json:"msg"`
 }
 
 var (
@@ -151,15 +150,17 @@ func process(conn net.Conn) {
 }
 
 func test(c net.Conn) {
+	mes := utils.NewMessage(c)
 	for {
-		var req request
-		err := utils.ReadData(c, &req)
+		var req data
+		err := mes.ReadData(&req)
 		if err != nil {
-			fmt.Println("error")
+			fmt.Println("error!!", err)
+			break
 		}
 		fmt.Println("req.msg = ", req.Msg)
-		fmt.Println("req.code = ", req.Code)
 	}
+	defer c.Close()
 }
 
 func main() {
