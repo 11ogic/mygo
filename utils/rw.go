@@ -43,7 +43,7 @@ func (m *Message) ReadData(inter interface{}) (err error) {
 		fmt.Println(string(buffer[:n]))
 		return err
 	}
-	fmt.Printf("size = %d; content = %+v", size, request)
+	fmt.Printf("size = %d; content = %+v \n", size, request)
 	return
 }
 

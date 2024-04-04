@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"mygo/utils"
 	"net"
+	"time"
 )
 
 type data struct {
@@ -20,6 +21,8 @@ func main() {
 	msg := utils.NewMessage(conn)
 
 	err = msg.WriteData(data{Msg: "哈哈"})
+	time.Sleep(3 * time.Second)
+	err = msg.WriteData(data{Msg: "今天天气真不错啊"})
 	if err != nil {
 		fmt.Println("err = ", err)
 	}
