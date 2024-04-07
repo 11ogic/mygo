@@ -52,7 +52,7 @@ func (m *Message) WriteData(inter interface{}) (err error) {
 	if err != nil {
 		return errors.New("marshal fail")
 	}
-	request := &RequestType{Data: string(data), Code: 200}
+	request := &RequestType{Data: string(data), Type: "SMS"}
 	sendData, err := json.Marshal(request)
 	if err != nil {
 		return errors.New("marshal fail")

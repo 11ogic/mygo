@@ -2,7 +2,6 @@ package utils
 
 type RequestType struct {
 	Data string `json:"data"`
-	Code uint8  `json:"code"`
 	Type string `json:"type"`
 }
 
