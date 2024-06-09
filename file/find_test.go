@@ -22,7 +22,7 @@ var (
 func TestFind(t *testing.T) {
 	start := time.Now()
 	increaseWorkerCount()
-	go search("/", true)
+	go search("/Users/", true)
 	waitForWorker()
 	fmt.Println("matched: ", matched)
 	fmt.Println(time.Since(start))
