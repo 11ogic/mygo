@@ -19,7 +19,7 @@ var (
 )
 
 func writeDataToFile() {
-	file, err := os.OpenFile(sourcePath, os.O_WRONLY|os.O_CREATE, 0666)
+	file, err := os.OpenFile(sourcePath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0666)
 	defer file.Close()
 	if err != nil {
 		fmt.Println("file error!")
@@ -33,10 +33,9 @@ func writeDataToFile() {
 			fmt.Println("Error writing to file:", err)
 		}
 	}
-	defer func() {
-		done <- true
-		writer.Flush()
-	}()
+	writer.Flush()
+	done <- true
+	close(done)
 }
 
 func sort() {
