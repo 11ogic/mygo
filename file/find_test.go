@@ -1,35 +1,35 @@
 package file
 
 import (
-    "fmt"
-    "os"
-    "testing"
-    "time"
+	"fmt"
+	"os"
+	"testing"
+	"time"
 )
 
 var (
-    matches = 0
-    query   = "package.json"
+	matches = 0
+	query   = "package.json"
 )
 
 func TestFind(t *testing.T) {
-    start := time.Now()
-    searchFile("/")
-    fmt.Printf("matches: %d \n", matches)
-    fmt.Println(start)
+	start := time.Now()
+	searchFile("/")
+	fmt.Printf("matches: %d \n", matches)
+	fmt.Println(start)
 }
 
 func searchFile(path string) {
-    files, err := os.ReadDir(path)
-    if err == nil {
-        for _, file := range files {
-            name := file.Name()
-            if name == query {
-                matches++
-            }
-            if file.IsDir() {
-                searchFile(path + "/" + name)
-            }
-        }
-    }
+	files, err := os.ReadDir(path)
+	if err == nil {
+		for _, file := range files {
+			name := file.Name()
+			if name == query {
+				matches++
+			}
+			if file.IsDir() {
+				searchFile(path + "/" + name)
+			}
+		}
+	}
 }
