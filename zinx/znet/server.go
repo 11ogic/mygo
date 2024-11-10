@@ -2,6 +2,7 @@ package znet
 
 import (
 	"fmt"
+	"io"
 	"mygo/zinx/zface"
 	"net"
 )
@@ -36,14 +37,29 @@ func (s *Server) Start() {
 			for {
 				buf := make([]byte, 512)
 				cnt, err := conn.Read(buf)
+				if err != nil {
+					fmt.Println("conn read data err", err)
+					if err == io.EOF {
+						return
+					}
+					continue
+				}
+				if _, err := conn.Write(buf[:cnt]); err != nil {
+					fmt.Println("write buf back error", err)
+					return
+				}
 			}
 		}()
 	}
+
 }
 
 func (s *Server) Stop() {}
 
-func (s *Server) Serve() {}
+func (s *Server) Serve() {
+	go s.Start()
+	select {}
+}
 
 func NewSever(name string) zface.Iserver {
 	return &Server{
