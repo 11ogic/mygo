@@ -1,6 +1,6 @@
 package zface
 
-type Iserver interface {
+type IServer interface {
 	Start()
 	Stop()
 	Serve()

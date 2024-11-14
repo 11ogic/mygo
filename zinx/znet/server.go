@@ -61,7 +61,7 @@ func (s *Server) Serve() {
 	select {}
 }
 
-func NewSever(name string) zface.Iserver {
+func NewSever(name string) zface.IServer {
 	return &Server{
 		Name:      name,
 		IPVersion: "tcp4",
