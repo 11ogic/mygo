@@ -2,7 +2,7 @@ package znet
 
 import (
 	"fmt"
-	"mygo/zinx/zface"
+	"zface"
 	"net"
 )
 
