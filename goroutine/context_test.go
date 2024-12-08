@@ -1,7 +1,6 @@
 package goroutine
 
 import (
-	"context"
 	"fmt"
 	"sync"
 	"testing"
@@ -9,32 +8,35 @@ import (
 )
 
 var (
-	wg = sync.WaitGroup{}
+	wg   = sync.WaitGroup{}
+	exit = make(chan struct{})
 )
 
 func TestContext(t *testing.T) {
-	ctx, cancel := context.WithCancel(context.Background())
+	//ctx, cancel := context.WithCancel(context.Background())
 	for i := 0; i < 3; i++ {
 		wg.Add(1)
 		go func() {
-			ip, err := getIP(ctx)
+			ip, err := getIP(exit)
 			fmt.Println(ip, err, "@@@")
 		}()
 	}
 	go func() {
 		time.Sleep(2 * time.Second)
-		cancel()
+		close(exit)
+		//exit <- struct{}{}
 	}()
 	wg.Wait()
 	fmt.Println("Done...")
 }
 
-func getIP(ctx context.Context) (ip string, err error) {
+func getIP(exit chan struct{}) (ip string, err error) {
 	go func() {
 		select {
-		case <-ctx.Done():
+		case <-exit:
 			wg.Done()
-			err = ctx.Err()
+			fmt.Println("Exit...")
+			//err = ctx.Err()
 			return
 		}
 	}()
