@@ -8,7 +8,7 @@ import (
 )
 
 type TodoList struct {
-	service.TodoList
+	*service.TodoList
 }
 
 func (l *TodoList) Cors(ctx *gin.Context) {
@@ -25,7 +25,14 @@ func (l *TodoList) Cors(ctx *gin.Context) {
 }
 
 func (l *TodoList) List(ctx *gin.Context) {
-	result := l.GetList()
+	result, err := l.GetList()
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"code": "400",
+			"data": nil,
+		})
+	}
 
 	fmt.Println(result)
 

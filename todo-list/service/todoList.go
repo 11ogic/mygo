@@ -1,18 +1,22 @@
 package service
 
 import (
-    "gorm.io/gorm"
-    "mygo/todo-list/model"
+	"gorm.io/gorm"
+	"mygo/todo-list/model"
 )
 
 type TodoList struct {
-    DB *gorm.DB
+	*gorm.DB
 }
 
-func (l *TodoList) GetList() []model.TodoList {
-    var todos []model.TodoList
+func (l *TodoList) GetList() ([]model.TodoList, error) {
+	var todos []model.TodoList
 
-    l.DB.Order("id desc").Find(&todos)
+	result := l.Order("id desc").Find(&todos)
 
-    return todos
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return todos, nil
 }
